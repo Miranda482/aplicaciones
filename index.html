@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexys Miranda - Técnico en Programación & Servicios TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030712;
+            --primary: #00ffcc;
+            --secondary: #7000ff;
+            --accent: #ff007f;
+            --text-color: #f3f4f6;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-glow: rgba(0, 255, 204, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo dinámico con partículas y rejilla animada */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -2;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        /* Orbes flotantes de luz */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            width: 350px;
+            height: 350px;
+            background: rgba(112, 0, 255, 0.4);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(0, 255, 204, 0.2);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Encabezado */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: #fff;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(112, 0, 255, 0.5);
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(112, 0, 255, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(0, 255, 204, 0.8); }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            letter-spacing: 1px;
+        }
+
+        /* Tarjetas de Servicios Dinámicas */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.15);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounceIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: #d1d5db;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Sección de Contacto y Llamado a la Acción */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(112, 0, 255, 0.1), rgba(0, 255, 204, 0.1));
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.1);
+            animation: borderFlicker 4s infinite alternate;
+        }
+
+        @keyframes borderFlicker {
+            0% { border-color: rgba(0, 255, 204, 0.3); }
+            100% { border-color: rgba(0, 255, 204, 0.9); box-shadow: 0 0 30px rgba(0, 255, 204, 0.3); }
+        }
+
+        .cta-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .phone-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--primary);
+            margin: 25px 0;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #25d366;
+            color: #fff;
+            padding: 16px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulseBtn 2s infinite;
+        }
+
+        @keyframes pulseBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6); }
+            100% { transform: scale(1); }
+        }
+
+        .whatsapp-btn:hover {
+            background: #20ba5a;
+            transform: translateY(-3px) scale(1.08);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="badge">Servicios de Tecnología e Informática</div>
+            <h1>Alexys Miranda</h1>
+            <p class="subtitle">Técnico en Programación & Soporte Profesional</p>
+        </header>
+
+        <!-- Servicios Grid -->
+        <div class="services-grid">
+            <!-- Licencias Office -->
+            <div class="card" style="animation-delay: 0.1s;">
+                <div class="card-icon">💻</div>
+                <h3>Licencias de Office</h3>
+                <p>Activaciones seguras, genuinas y estables para que aproveches al máximo todas las herramientas de Microsoft Office sin interrupciones.</p>
+            </div>
+
+            <!-- Instalación Windows -->
+            <div class="card" style="animation-delay: 0.2s;">
+                <div class="card-icon">⚡</div>
+                <h3>Instalación de Windows</h3>
+                <p>Optimización, formateo e instalación limpia de sistemas operativos Windows con drivers actualizados al máximo rendimiento.</p>
+            </div>
+
+            <!-- Trámites en Línea -->
+            <div class="card" style="animation-delay: 0.3s;">
+                <div class="card-icon">🌐</div>
+                <h3>Trámites en Línea</h3>
+                <p>Asesoría y gestión rápida para diversidad de trámites digitales gubernamentales, escolares y profesionales sin complicaciones.</p>
+            </div>
+
+            <!-- Clases Word 365 -->
+            <div class="card" style="animation-delay: 0.4s;">
+                <div class="card-icon">📚</div>
+                <h3>Clases de Word 365</h3>
+                <p>Aprende desde cero o perfecciona tu nivel con clases especializadas en Microsoft Word 365: domina documentos profesionales, plantillas y trucos avanzados.</p>
+            </div>
+
+            <!--Creamos paginas web a tu medida-->
+            <div class="card" style="animation-delay: 0.4s;">
+                <div class="card-icon">📚</div>
+                <h3>Creacion de paginas web y software a la medida</h3>
+                <p>Inova tu negocio para hacerlo mas dinamico y efciente, hacemos paginas en todo el mundo y contamos con un año de experiencia.</p>
+            </div>
+        </div>
+
+        <!-- Sección de Contacto -->
+        <section class="cta-section">
+            <h2>¿Listo para optimizar tu equipo o necesitas ayuda profesional?</h2>
+            <p style="color: #9ca3af; margin-bottom: 10px;">Comunícate directamente con Alexys Miranda ahora mismo:</p>
+            <div class="phone-display">📱 722 566 8959</div>
+            <a href="https://wa.me/527225668959?text=Hola%20Alexys,%20vi%20tu%20página%20web%20y%20necesito%20información%20sobre%20tus%20servicios." class="whatsapp-btn" target="_blank">
+                Contactar por WhatsApp
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 Alexys Miranda - Técnico en Programación. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
